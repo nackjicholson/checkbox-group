@@ -12,9 +12,10 @@ to respond to selection changes, and control the styling and HTML markup of your
 
 ```js
 import React from 'react';
-import statelessRadioGroup from 'stateless-radio';
+import ReactDOM from 'react-dom';
+import checkboxGroup from 'checkbox-group';
 
-const StatelessRadioGroup = statelessRadioGroup(React);
+const CheckboxGroup = checkboxGroup(React, ReactDOM);
 
 function handleChange(values) {
   // callback is passed an array of the values which are selected.
@@ -41,19 +42,18 @@ Produces this HTML when rendered by a component:
 </div>
 ```
 
-
 ## API
 
 ### Factory Function
 
-`checkboxGroup :: React => props => ReactElement`
+`checkboxGroup :: (React, ReactDOM) => props => ReactElement`
 
-This module exports factory function which takes your instance of `React` as it's argument, and returns the
-stateless constructor function for a `StatelessRadioGroup` component.
+This module exports factory function which takes your instances of `React` and `ReactDOM` as it's arguments, and returns the
+constructor for a `CheckboxGroup` component.
 
 ```js
 import checkboxGroup from 'checkbox-group';
-const CheckboxGroup = checkboxGroup(React);
+const CheckboxGroup = checkboxGroup(React, ReactDOM);
 ```
 
 ### <CheckboxGroup /> Component

@@ -30,17 +30,18 @@
     "jsdom": "^8.0.2",
     "mocha": "^2.4.5",
     "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "sinon": "^1.17.3",
     "teaspoon": "^6.1.1",
     "watch": "^0.17.1",
     "webpack": "^1.12.13"
   },
   "dependencies": {
-    "lodash.includes": "^4.0.1",
-    "react-dom": "^0.14.7"
+    "lodash.includes": "^4.0.1"
   },
   "peerDependencies": {
-    "react": "^0.14.0"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "scripts": {
     "cov": "babel-node node_modules/.bin/isparta cover --report html --report text --excludes src/**/*.test.js _mocha -- --require src/test/jsdomHelper.js --reporter list src/**/*.test.js",

@@ -1,12 +1,13 @@
 import $ from 'teaspoon';
 import assert from 'assert';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { spy } from 'sinon';
 import checkboxGroup from './checkboxGroup';
 
 function createComponent(customProps = {}) {
   const props = Object.assign({}, customProps);
-  const CheckboxGroup = checkboxGroup(React);
+  const CheckboxGroup = checkboxGroup(React, ReactDOM);
   return (
     <CheckboxGroup {...props}>
       {Checkbox =>

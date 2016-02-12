@@ -1,7 +1,6 @@
 import statelessCheckbox from './statelessCheckbox';
-import ReactDOM from 'react-dom';
 
-function checkboxGroup(React) {
+function checkboxGroup(React, ReactDOM) {
   class CheckboxGroup extends React.Component {
     _getCheckboxes() {
       return [...ReactDOM.findDOMNode(this).querySelectorAll('input[type="checkbox"]')];
