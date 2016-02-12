@@ -23,7 +23,7 @@ function createComponent(customProps = {}) {
 
 describe('checkboxGroup', () => {
   it('should return a react component constructor', () => {
-    const actual = typeof checkboxGroup(React);
+    const actual = typeof checkboxGroup(React, ReactDOM);
     const expected = 'function';
 
     assert.equal(actual, expected, 'statelessRadioGroup returns stateless component function');
