@@ -55,7 +55,7 @@ import checkboxGroup from 'checkbox-group';
 const CheckboxGroup = checkboxGroup(React);
 ```
 
-### <CheckboxGroup /> Component
+### `<CheckboxGroup />` Component
 
 Props:
 
@@ -64,7 +64,7 @@ Props:
 - **onSelection** *func* A callback function which is called with a value, whenever the radio group's selection is changed.
 - **name** *string* A unique name for identifying the checkbox inputs. What you'd normally put as the `name` prop on a checkbox input tag.
 
-### <Checkbox /> Component
+### `<Checkbox />` Component
 
 (Since you're getting that as the argument of your children function, you could have named it anything you wanted really.) Any prop you pass onto it will be transferred to the actual input under the hood.
 
