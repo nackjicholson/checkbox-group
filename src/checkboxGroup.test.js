@@ -1,20 +1,19 @@
 import $ from 'teaspoon';
 import assert from 'assert';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { spy } from 'sinon';
+import {spy} from 'sinon';
 import checkboxGroup from './checkboxGroup';
 
 function createComponent(customProps = {}) {
   const props = Object.assign({}, customProps);
-  const CheckboxGroup = checkboxGroup(React, ReactDOM);
+  const CheckboxGroup = checkboxGroup(React);
   return (
     <CheckboxGroup {...props}>
       {Checkbox =>
         <div>
-          <Checkbox value="alpha" />
-          <Checkbox value="bravo" />
-          <Checkbox value="charlie" />
+          <Checkbox value="alpha"/>
+          <Checkbox value="bravo"/>
+          <Checkbox value="charlie"/>
         </div>
       }
     </CheckboxGroup>
@@ -23,7 +22,7 @@ function createComponent(customProps = {}) {
 
 describe('checkboxGroup', () => {
   it('should return a react component constructor', () => {
-    const actual = typeof checkboxGroup(React, ReactDOM);
+    const actual = typeof checkboxGroup(React);
     const expected = 'function';
 
     assert.equal(actual, expected, 'statelessRadioGroup returns stateless component function');
@@ -42,15 +41,15 @@ describe('checkboxGroup', () => {
   });
 
   it('should be able to check boxes by default via defaultValues prop', () => {
-    const props = { defaultValues: ['alpha', 'charlie'] };
+    const props = {values: ['alpha', 'charlie']};
     const component = createComponent(props);
 
     const $checkedInputs = $(component)
       .render()
-      .find('div input[defaultChecked]');
+      .find('div input[checked]');
 
     const actualCheckedValues = $checkedInputs
-      .map((node) => node.value)
+      .map(node => node.value)
       .get();
     const expectedCheckedValues = ['alpha', 'charlie'];
 
@@ -58,15 +57,15 @@ describe('checkboxGroup', () => {
   });
 
   it('should call onSelection callback with all checked values on change', () => {
-    const props = { onSelection: spy() };
+    const props = {onSelection: spy()};
     const component = createComponent(props);
 
     const $elements = $(component).render();
     const $alphaBox = $elements.find('input[value=alpha]');
-    const $charlieBox = $elements.find('input[value=charlie]');
 
-    $alphaBox.dom().checked = true;
-    $alphaBox.trigger('change');
+    const alphaBoxNode = $alphaBox.dom();
+    alphaBoxNode.checked = true;
+    $alphaBox.trigger('change', {target: alphaBoxNode});
 
     assert(props.onSelection.calledOnce, 'onSelection called once');
     assert.equal(
@@ -84,8 +83,10 @@ describe('checkboxGroup', () => {
       'onSelection callback was called with values array of the checked boxes'
     );
 
-    $charlieBox.dom().checked = true;
-    $charlieBox.trigger('change');
+    const $charlieBox = $elements.find('input[value=charlie]');
+    const charlieBoxNode = $charlieBox.dom();
+    charlieBoxNode.checked = true;
+    $charlieBox.trigger('change', {target: charlieBoxNode});
 
     assert(props.onSelection.calledTwice, 'onSelection called twice');
     assert.equal(

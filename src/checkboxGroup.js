@@ -1,33 +1,56 @@
-import statelessCheckbox from './statelessCheckbox';
+import checkbox from './checkbox';
 
-function checkboxGroup(React, ReactDOM) {
+function newValuesAfterChange(values, box) {
+  if (box.checked) {
+    return values.concat(box.value);
+  }
+
+  return values.filter(value => value !== box.value);
+}
+
+function checkboxGroup(React) {
   class CheckboxGroup extends React.Component {
-    _getCheckboxes() {
-      return [...ReactDOM.findDOMNode(this).querySelectorAll('input[type="checkbox"]')];
+    constructor(props) {
+      super(props);
+      this.state = {values: props.values};
+      this._handleSelection = this._handleSelection.bind(this);
     }
 
-    _handleSelection() {
-      const checkboxes = this._getCheckboxes();
-      const values = checkboxes
-        .filter(checkboxNode => checkboxNode.checked)
-        .map(checkboxNode => checkboxNode.value);
+    getChildContext() {
+      return {
+        name: this.props.name,
+        values: this.state.values,
+        onChange: this._handleSelection
+      };
+    }
 
+    _handleSelection(event) {
+      const values = newValuesAfterChange(this.state.values, event.target);
+      this.setState({values});
       this.props.onSelection(values);
     }
 
     render() {
-      const { defaultValues, name, children } = this.props;
-      const checkboxConfig = { defaultValues, name, onChange: this._handleSelection.bind(this) };
-
-      return children(statelessCheckbox(React, checkboxConfig));
+      return this.props.children(checkbox(React));
     }
   }
 
+  CheckboxGroup.defaultProps = {
+    onSelection: () => {},
+    values: []
+  };
+
   CheckboxGroup.propTypes = {
     name: React.PropTypes.string,
-    defaultValues: React.PropTypes.array,
+    values: React.PropTypes.array,
     onSelection: React.PropTypes.func,
     children: React.PropTypes.func.isRequired
+  };
+
+  CheckboxGroup.childContextTypes = {
+    values: React.PropTypes.array,
+    name: React.PropTypes.string,
+    onChange: React.PropTypes.func
   };
 
   return CheckboxGroup;

@@ -12,16 +12,15 @@ to respond to selection changes, and control the styling and HTML markup of your
 
 ```js
 import React from 'react';
-import ReactDOM from 'react-dom';
 import checkboxGroup from 'checkbox-group';
 
-const CheckboxGroup = checkboxGroup(React, ReactDOM);
+const CheckboxGroup = checkboxGroup(React);
 
 function handleChange(values) {
   // callback is passed an array of the values which are selected.
 }
 
-<CheckboxGroup name="fruit" defaultValues={['orange']} onSelection={handleChange}>
+<CheckboxGroup name="fruit" values={['orange']} onSelection={handleChange}>
   {Checkbox =>
     <div>
       <Checkbox value="apple" />Apple
@@ -46,14 +45,14 @@ Produces this HTML when rendered by a component:
 
 ### Factory Function
 
-`checkboxGroup :: (React, ReactDOM) => props => ReactElement`
+`checkboxGroup :: (React) => props => ReactElement`
 
-This module exports factory function which takes your instances of `React` and `ReactDOM` as it's arguments, and returns the
+This module exports factory function which takes your instances of `React`, and returns the
 constructor for a `CheckboxGroup` component.
 
 ```js
 import checkboxGroup from 'checkbox-group';
-const CheckboxGroup = checkboxGroup(React, ReactDOM);
+const CheckboxGroup = checkboxGroup(React);
 ```
 
 ### <CheckboxGroup /> Component
@@ -61,7 +60,7 @@ const CheckboxGroup = checkboxGroup(React, ReactDOM);
 Props:
 
 - **children** *func* *required* A function which builds the content of the radio group
-- **defaultValues** *array* An array of values used to compare against the values of the `Checkbox` components in order to select them by default on first render.
+- **values** *array* An array of values used to compare against the values of the `Checkbox` components in order to select them by default on first render.
 - **onSelection** *func* A callback function which is called with a value, whenever the radio group's selection is changed.
 - **name** *string* A unique name for identifying the checkbox inputs. What you'd normally put as the `name` prop on a checkbox input tag.
 
