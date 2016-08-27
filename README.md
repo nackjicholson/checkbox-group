@@ -64,47 +64,10 @@ Props:
 - **onSelection** *func* A callback function which is called with a value, whenever the radio group's selection is changed.
 - **name** *string* A unique name for identifying the checkbox inputs. What you'd normally put as the `name` prop on a checkbox input tag.
 
-### <Checkbox />
+### <Checkbox /> Component
 
 (Since you're getting that as the argument of your children function, you could have named it anything you wanted really.) Any prop you pass onto it will be transferred to the actual input under the hood.
 
 ## Contributing
 
-### NPM Scripts Documentation
-
-**Linting with Eslint**
-
-Configured by default to use the "airbnb/base" eslint preset which provides 
-a mostly sane set of rules for writing JavaScript, learn more [here](https://github.com/airbnb/javascript)
-
-`$ npm run lint`
-
-Will lint your code anytime a file changes in the `src` directory. Analyzes your code for adherence to
-a [`jscs`](http://jscs.info/) code style specification. Uses the "airbnb" jscs preset.
-
-**Tests with mocha**
-
-`$ npm test`
-
-Runs a test of your `src` code using mocha. Tests can be written using es2015 as well.
-
-`$ npm run cov`
-
-Produces an istanbul coverage report in the `coverage/` directory.
-
-**Dev Mode**
-
-`$ npm run tdd`
-
-Run a file watcher to run the tests anytime a file in `src` is changed.
-
-`$ npm run tdd:lint`
-
-Run a file watcher which performs linting, code style checks, and tests anytime you save a file.
-
-**Transpile to ES5 with Babel**
-
-`$ npm run build`
-
-Packages your library to an es5 commonjs module using webpack and places it in the `dist/` dir.
-
+See [contributing.md](contributing.md)
